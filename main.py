@@ -122,6 +122,7 @@ def mino_icon(mino_type: int, icon_width: int, enabled: bool = True, on_clicked=
                         NAMES[mino_type],
                         text_align=ft.alignment.center,
                         size=20,
+                        color="#000000" if enabled else "#aaaaaa",
                     ),
                     width=icon_width*0.2,
                     height=size*3,
