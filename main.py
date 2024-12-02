@@ -88,7 +88,6 @@ def mino_icon(mino_type: int, icon_width: int, enabled: bool = True, on_clicked=
         color="#cccccc",
         stroke_width=2,
     )
-
     size = icon_width*0.8 // WIDTH
 
     shapes = []
@@ -141,10 +140,10 @@ def mino_icon(mino_type: int, icon_width: int, enabled: bool = True, on_clicked=
 
 
 def result_board(board, w, h, board_width, board_height):
+    global failed
+
     margin = 5
     size = min(board_width / w, board_height / h)
-
-    global failed
 
     shapes = []
     shapes.append(
@@ -211,14 +210,14 @@ def main(page: ft.Page):
     minos_margin_horizontal = 100
     icon_width = (page.width - minos_margin_horizontal*2) / 6
 
-    def on_canvas_cliecked(e):
+    def on_canvas_clicked(e):
         for i in range(6):
             page.controls[1].controls[i] = mino_icon(
-                i, icon_width, uses[i], on_canvas_cliecked)
+                i, icon_width, uses[i], on_canvas_clicked)
 
         for i in range(6, 12):
             page.controls[3].controls[i-6] = mino_icon(
-                i, icon_width, uses[i], on_canvas_cliecked)
+                i, icon_width, uses[i], on_canvas_clicked)
 
         global failed
         failed = False
@@ -226,21 +225,23 @@ def main(page: ft.Page):
             board, int(dd_size.value.split("x")[0]), int(dd_size.value.split("x")[1]), WINDOW_WIDTH*0.9, WINDOW_HEIGHT*0.5)
         page.update()
 
+    # upper minos
     page.add(ft.Container(height=5))
     r = []
     for i in range(6):
-        e = mino_icon(i, icon_width, uses[i], on_canvas_cliecked)
+        e = mino_icon(i, icon_width, uses[i], on_canvas_clicked)
         r.append(e)
     page.add(ft.Row(controls=r, alignment=ft.MainAxisAlignment.CENTER,))
 
+    # lower minos
     page.add(ft.Container(height=5))
     r = []
     for i in range(6, 12):
-        e = mino_icon(i, icon_width, uses[i], on_canvas_cliecked)
+        e = mino_icon(i, icon_width, uses[i], on_canvas_clicked)
         r.append(e)
     page.add(ft.Row(controls=r, alignment=ft.MainAxisAlignment.CENTER,))
 
-    def on_dd_changed(e):
+    def on_dropdown_changed(e):
         global failed
         failed = False
         page.controls[7].controls[0] = result_board(
@@ -270,30 +271,29 @@ def main(page: ft.Page):
             ft.dropdown.Option("5x4"),
             ft.dropdown.Option("5x3"),
         ],
-        on_change=on_dd_changed,
+        on_change=on_dropdown_changed,
     )
     dd_size.value = "12x5"
 
-    def button_clicked(e):
+    def on_solve_clicked(e):
         global calculating, failed
 
         if calculating:
             return
 
+        # start calculating
         calculating = True
         page.controls[5].controls[1].disabled = True
         page.controls[5].controls[2].disabled = True
         page.controls[5].controls[3] = ft.ProgressRing(width=16, height=16)
         page.update()
 
-        ans = solve(
-            int(dd_size.value.split("x")[0]),
-            int(dd_size.value.split("x")[1]),
-            uses,
-        )
+        # solve
         w, h = int(dd_size.value.split("x")[0]), int(
             dd_size.value.split("x")[1])
+        ans = solve(w, h, uses,)
 
+        # finish calculating
         failed = not ans[0]
         page.controls[5].controls[1].disabled = False
         page.controls[5].controls[2].disabled = False
@@ -303,13 +303,14 @@ def main(page: ft.Page):
         page.update()
         calculating = False
 
+    # loading icon
     loading = ft.Container(width=16, height=16)
 
     r = ft.Row(
         [
             ft.Text("Size: ", size=20),
             dd_size,
-            ft.Button("Solve", on_click=button_clicked),
+            ft.Button("Solve", on_click=on_solve_clicked),
             loading,
         ],
         alignment=ft.MainAxisAlignment.CENTER,
