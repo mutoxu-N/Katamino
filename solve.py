@@ -1,5 +1,4 @@
-from pprint import pprint
-from minos import MINOS, F, I, L, N, P, T, U, V, W, X, Y, Z, Mino
+from minos import MINOS, F, I, L, N, P, T, U, V, W, X, Y, Z
 from copy import deepcopy
 
 
@@ -9,6 +8,27 @@ def solve(
         uses: list[bool],
 ) -> list:
     # check board size
+    """
+    Solve the Katamino puzzle with given board dimensions and available Minos.
+
+    The function attempts to solve the puzzle based on the width and height of the board,
+    and a list of booleans indicating which Minos are available for use. Each Mino type
+    is represented by a boolean value in the 'uses' list; 'True' means the Mino is available,
+    and 'False' means it is not.
+
+    The function checks if the board size is appropriate for the available Minos and
+    attempts to cover the board without any gaps using the available Minos.
+
+    :param width: The width of the board.
+    :type width: int
+    :param height: The height of the board.
+    :type height: int
+    :param uses: A list of boolean values indicating the availability of each Mino type.
+    :type uses: list[bool]
+    :return: A tuple where the first element is a boolean indicating success, and the second
+             element is the solved board or None if no solution exists.
+    :rtype: list
+    """
     if width * height % 5 != 0:
         return (False, None)
 
@@ -34,6 +54,19 @@ def solve(
 
 
 def print_board(board):
+    """
+    Print the board in a human-readable format.
+
+    Each cell is represented by a character. The characters are as follows:
+
+    - `_`: Empty cell
+    - `F`, `I`, `L`, `N`, `P`, `T`, `U`, `V`, `W`, `X`, `Y`, `Z`: The type of the Mino on the cell
+
+    The board is printed row by row, with each row separated by a newline character.
+
+    :param board: The board to print
+    :type board: list[list[int]]
+    """
     m = {
         -1: "_",
         F: "F",
@@ -53,12 +86,10 @@ def print_board(board):
         for b in bs:
             print(m[b], end=" ")
         print()
-
     print()
 
 
 def put(board, remains, start_x, start_y, depth, max_depth):
-
     if depth == max_depth:
         return board
 

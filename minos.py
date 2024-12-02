@@ -1,4 +1,3 @@
-
 from copy import deepcopy
 
 F = 0
@@ -17,12 +16,40 @@ Z = 11
 
 class Mino:
     def __init__(self, width, height, type, coords):
+        """
+        Initialize a Mino object with given width, height, type and coordinates.
+
+        :param width: The width of the Mino.
+        :type width: int
+        :param height: The height of the Mino.
+        :type height: int
+        :param type: The type of the Mino.
+        :type type: int
+        :param coords: The coordinates of the Mino.
+        :type coords: list[list[int]]
+        """
         self.width = width
         self.height = height
         self.type = type
         self.coords = coords
 
     def can_place(self, board, x, y):
+        """
+        Check if the Mino can be placed on the board at the specified position.
+
+        This method verifies whether the Mino, represented by its coordinates, can be placed
+        on the board at position (x, y) without overlapping any existing pieces or going
+        out of bounds.
+
+        :param board: The current state of the board.
+        :type board: list[list[int]]
+        :param x: The x-coordinate on the board where the Mino is to be placed.
+        :type x: int
+        :param y: The y-coordinate on the board where the Mino is to be placed.
+        :type y: int
+        :return: True if the Mino can be placed at the specified position, False otherwise.
+        :rtype: bool
+        """
         if x + self.width >= len(board[0]) or y + self.height - self.coords[0][1] >= len(board) or y - self.coords[0][1] < 0:
             return False
 
@@ -35,6 +62,18 @@ class Mino:
         return True
 
     def place(self, board, x, y):
+        """
+        Place the Mino on the board at the specified position.
+
+        This method places the Mino, represented by its coordinates, on the board at position (x, y).
+
+        :param board: The current state of the board.
+        :type board: list[list[int]]
+        :param x: The x-coordinate on the board where the Mino is to be placed.
+        :type x: int
+        :param y: The y-coordinate on the board where the Mino is to be placed.
+        :type y: int
+        """
         for i in range(5):
             nx = x + self.coords[i][0] - self.coords[0][0]
             ny = y + self.coords[i][1] - self.coords[0][1]
