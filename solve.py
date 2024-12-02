@@ -140,7 +140,7 @@ def put(board, remains, start_x, start_y, depth, max_depth):
 
 
 if __name__ == "__main__":
-    ans = solve(10, 6)
+    ans = solve(10, 6, [True]*12)
     if ans[0]:
         print_board(ans[1])
     else:
