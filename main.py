@@ -1,4 +1,3 @@
-from solve import print_board
 import flet as ft
 import flet.canvas as cv
 from minos import F, I, L, N, P, T, U, V, W, X, Y, Z
