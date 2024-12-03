@@ -199,7 +199,7 @@ def result_board(board, w, h, board_width, board_height):
 
 
 def main(page: ft.Page):
-    page.title = "KATAMINO Solver"
+    page.title = "KATAMINO Solver by mutoxu=N"
     WINDOW_WIDTH = 1280
     WINDOW_HEIGHT = 670
 
