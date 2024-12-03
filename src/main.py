@@ -201,10 +201,7 @@ def result_board(board, w, h, board_width, board_height):
 def main(page: ft.Page):
     page.title = "KATAMINO Solver"
     WINDOW_WIDTH = 1280
-    WINDOW_HEIGHT = 800
-    page.window.width = WINDOW_WIDTH
-    page.window.height = WINDOW_HEIGHT
-    page.window.resizable = False
+    WINDOW_HEIGHT = 670
 
     # minos
     minos_margin_horizontal = 100
@@ -328,4 +325,4 @@ def main(page: ft.Page):
     page.update()
 
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
