@@ -1,6 +1,6 @@
 import flet as ft
 import flet.canvas as cv
-from minos import F, I, L, N, P, T, U, V, W, X, Y, Z
+from minoes import F, I, L, N, P, T, U, V, W, X, Y, Z
 from solve import solve
 
 COLORS = {
@@ -203,9 +203,9 @@ def main(page: ft.Page):
     WINDOW_WIDTH = 1280
     WINDOW_HEIGHT = 670
 
-    # minos
-    minos_margin_horizontal = 100
-    icon_width = (page.width - minos_margin_horizontal*2) / 6
+    # minoes
+    minoes_margin_horizontal = 100
+    icon_width = (page.width - minoes_margin_horizontal*2) / 6
 
     def on_canvas_clicked(e):
         for i in range(6):
@@ -222,7 +222,7 @@ def main(page: ft.Page):
             board, int(dd_size.value.split("x")[0]), int(dd_size.value.split("x")[1]), WINDOW_WIDTH*0.9, WINDOW_HEIGHT*0.5)
         page.update()
 
-    # upper minos
+    # upper minoes
     page.add(ft.Container(height=5))
     r = []
     for i in range(6):
@@ -230,7 +230,7 @@ def main(page: ft.Page):
         r.append(e)
     page.add(ft.Row(controls=r, alignment=ft.MainAxisAlignment.CENTER,))
 
-    # lower minos
+    # lower minoes
     page.add(ft.Container(height=5))
     r = []
     for i in range(6, 12):

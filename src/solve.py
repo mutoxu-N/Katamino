@@ -1,4 +1,4 @@
-from minos import MINOS, F, I, L, N, P, T, U, V, W, X, Y, Z
+from minoes import MINOES, F, I, L, N, P, T, U, V, W, X, Y, Z
 from copy import deepcopy
 
 
@@ -9,15 +9,15 @@ def solve(
 ) -> list:
     # check board size
     """
-    Solve the Katamino puzzle with given board dimensions and available Minos.
+    Solve the Katamino puzzle with given board dimensions and available Minoes.
 
     The function attempts to solve the puzzle based on the width and height of the board,
-    and a list of booleans indicating which Minos are available for use. Each Mino type
+    and a list of booleans indicating which Minoes are available for use. Each Mino type
     is represented by a boolean value in the 'uses' list; 'True' means the Mino is available,
     and 'False' means it is not.
 
-    The function checks if the board size is appropriate for the available Minos and
-    attempts to cover the board without any gaps using the available Minos.
+    The function checks if the board size is appropriate for the available Minoes and
+    attempts to cover the board without any gaps using the available Minoes.
 
     :param width: The width of the board.
     :type width: int
@@ -41,7 +41,7 @@ def solve(
         return (False, None)
 
     board = [[-1]*width for _ in [None]*height]
-    remains = deepcopy(MINOS)
+    remains = deepcopy(MINOES)
 
     for use in range(len(uses)):
         if not uses[use]:
