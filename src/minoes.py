@@ -110,12 +110,12 @@ def flip(shape):
         s[1] -= y
 
 
-MINOS = [[] for _ in range(12)]
+MINOES = [[] for _ in range(12)]
 
 
 def f(shape, pos, t):
     if pos[0]:
-        MINOS[t].append(Mino(
+        MINOES[t].append(Mino(
             max(s[0] for s in shape),
             max(s[1] for s in shape),
             t,
@@ -125,7 +125,7 @@ def f(shape, pos, t):
     for i in range(1, 4):
         rot(shape)
         if pos[i]:
-            MINOS[t].append(Mino(
+            MINOES[t].append(Mino(
                 max(s[0] for s in shape),
                 max(s[1] for s in shape),
                 t,
@@ -136,7 +136,7 @@ def f(shape, pos, t):
     flip(shape)
     for i in range(4, 8):
         if pos[i]:
-            MINOS[t].append(Mino(
+            MINOES[t].append(Mino(
                 max(s[0] for s in shape),
                 max(s[1] for s in shape),
                 t,
@@ -207,5 +207,5 @@ mino_z = [
 f(mino_z, [True, True, False, False] * 2, Z)
 
 if __name__ == "__main__":
-    print(MINOS[I][0].width, MINOS[I][0].height, MINOS[I][0].coords)
-    print(MINOS[I][1].width, MINOS[I][1].height, MINOS[I][1].coords)
+    print(MINOES[I][0].width, MINOES[I][0].height, MINOES[I][0].coords)
+    print(MINOES[I][1].width, MINOES[I][1].height, MINOES[I][1].coords)
